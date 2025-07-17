@@ -6,6 +6,7 @@ import Btn from "./btn.jsx";
 
 function App() {
   const [products, setProducts] = useState(productsData);
+  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <>
@@ -29,23 +30,37 @@ function App() {
           <span className="cart-number">0</span>
         </div>
       </header>
-      <div className="search-div">
-        <label className="search-label" htmlFor="search-input">
-          Search product
-        </label>
-        <input className="search-input" type="text" />
-      </div>
-      <ul className="products-list">
-        {products.map((product) => (
-          <Li
-            key={product.id}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-          ></Li>
-        ))}
-      </ul>
-      <Btn variation="go">Go to your cart</Btn>
+      {!isClicked ? (
+        <>
+          <div className="search-div">
+            <label className="search-label" htmlFor="search-input">
+              Search product
+            </label>
+            <input className="search-input" type="text" />
+          </div>
+          <ul className="products-list">
+            {products.map((product) => (
+              <Li
+                key={product.id}
+                name={product.name}
+                description={product.description}
+                price={product.price}
+              ></Li>
+            ))}
+          </ul>
+          <Btn variation="go" onClick={() => setIsClicked(true)}>
+            Go to your cart
+          </Btn>{" "}
+        </>
+      ) : (
+        <>
+          <h1 className="empty-h1">Your cart is empty...</h1>
+          <Btn variation="back" onClick={() => setIsClicked(false)}>
+            Back to Products
+          </Btn>
+        </>
+      )}
+
       <div className="total-price-div">
         <h3 className="total-text">Total price:</h3>
         <span className="total-price">0.00$</span>

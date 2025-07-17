@@ -1,4 +1,4 @@
-function Btn({ children, variation }) {
+function Btn({ children, variation, onClick }) {
   const baseClass = "go-back-btn";
   let modifierClass = "";
 
@@ -10,7 +10,11 @@ function Btn({ children, variation }) {
 
   const finalClass = `${baseClass} ${modifierClass}`;
 
-  return <button className={finalClass}>{children}</button>;
+  return (
+    <button className={finalClass} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
 
 export default Btn;

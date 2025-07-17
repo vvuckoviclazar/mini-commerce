@@ -202,3 +202,10 @@ p {
   color: #4e4e4f;
   font-weight: 300;
 }
+
+.empty-h1 {
+  font-size: 45rem;
+  margin-bottom: 40rem;
+  color: #212529;
+  padding-top: 40rem;
+}
