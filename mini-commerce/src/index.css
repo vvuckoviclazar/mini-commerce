@@ -86,7 +86,8 @@ header {
   outline: 1rem #000000 solid;
 }
 
-.products-list {
+.products-list,
+.cart-list {
   margin-bottom: 15rem;
   list-style-type: none;
   padding-left: 0rem;
