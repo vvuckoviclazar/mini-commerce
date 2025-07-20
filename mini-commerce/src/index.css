@@ -210,3 +210,25 @@ p {
   color: #212529;
   padding-top: 40rem;
 }
+
+.increase,
+.decrease {
+  border: none;
+  background-color: rgb(225, 225, 225);
+  border-radius: 5rem;
+  font-size: 30rem;
+  color: #484848;
+  padding: 0rem 10rem 0rem 10rem;
+  cursor: pointer;
+}
+
+.increase:hover,
+.decrease:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+.amount-span {
+  font-size: 30rem;
+  font-weight: 500;
+  color: #4d4f51;
+}

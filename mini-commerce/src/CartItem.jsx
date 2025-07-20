@@ -1,4 +1,18 @@
-function CartItem({ name, description, price, amount }) {
+function CartItem({
+  name,
+  description,
+  price,
+  amount,
+  onIncrease,
+  onDecrease,
+}) {
+  function handleIncrease() {
+    onIncrease();
+  }
+
+  function handleDecrease() {
+    onDecrease();
+  }
   return (
     <li>
       <div className="title-div">
@@ -8,8 +22,13 @@ function CartItem({ name, description, price, amount }) {
       </div>
       <div className="amount-div">
         <div className="input-div">
-          <label className="amount-label">Amount</label>
-          <span className="amount-input">{amount}</span>
+          <button className="decrease" onClick={onDecrease}>
+            -
+          </button>
+          <span className="amount-span">{amount}</span>
+          <button className="increase" onClick={onIncrease}>
+            +
+          </button>
         </div>
       </div>
     </li>

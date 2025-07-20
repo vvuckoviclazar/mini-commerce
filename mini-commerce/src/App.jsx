@@ -6,13 +6,36 @@ import Btn from "./btn.jsx";
 import CartItem from "./CartItem.jsx";
 
 function App() {
-  const [products, setProducts] = useState(productsData);
+  const [products] = useState(productsData);
   const [isClicked, setIsClicked] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.amount,
     0
+  );
+
+  const increaseItemAmount = (id) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, amount: item.amount + 1 } : item
+      )
+    );
+  };
+
+  const decreaseItemAmount = (id) => {
+    setCartItems((prev) =>
+      prev
+        .map((item) =>
+          item.id === id ? { ...item, amount: item.amount - 1 } : item
+        )
+        .filter((item) => item.amount > 0)
+    );
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleAddToCart = (itemToAdd) => {
@@ -61,11 +84,17 @@ function App() {
             <label className="search-label" htmlFor="search-input">
               Search product
             </label>
-            <input className="search-input" type="text" id="search-input" />
+            <input
+              className="search-input"
+              type="text"
+              id="search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
 
           <ul className="products-list">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Li
                 key={product.id}
                 id={product.id}
@@ -98,6 +127,8 @@ function App() {
                 description={item.description}
                 price={item.price}
                 amount={item.amount}
+                onIncrease={() => increaseItemAmount(item.id)}
+                onDecrease={() => decreaseItemAmount(item.id)}
               />
             ))}
           </ul>
